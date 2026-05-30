@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mumbai Indians Fan Hub 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #004BA0;
+      --gold: #D4A017;
+      --gold-light: #F5C842;
+      --dark: #020C1B;
+      --darker: #010810;
+      --mid: #0A1F3D;
+      --sky: #1A8FE3;
+      --white: #F0F4FF;
+      --muted: #7A97C0;
+      --green: #22c55e;
+      --red: #ef4444;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--darker); color: var(--white); font-family: 'Barlow', sans-serif; overflow-x: hidden; }
+
+    /* ─── LIVE TICKER ─── */
+    .live-ticker {
+      background: linear-gradient(90deg, var(--blue), #003070);
+      border-bottom: 2px solid var(--gold);
+      padding: 8px 0;
+      overflow: hidden;
+      position: relative;
+      z-index: 200;
+    }
+    .ticker-inner {
+      display: flex;
+      animation: ticker-scroll 40s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-inner:hover { animation-play-state: paused; }
+    .ticker-item {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      padding: 0 40px;
+    }
+    .ticker-live {
+      background: var(--red);
+      color: #fff;
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 2px;
+      margin-right: 8px;
+      animation: blink 1s ease infinite;
+    }
+    .ticker-gold { color: var(--gold-light); }
+    @keyframes ticker-scroll { 0%{transform:translateX(100vw)} 100%{transform:translateX(-200%)} }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      position: sticky; top: 0; width: 100%; z-index: 100;
+      background: rgba(2, 12, 27, 0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(212,160,23,0.25);
+      padding: 0 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo-wrap {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo-img {
+      height: 42px; width: auto;
+      filter: brightness(1.2) saturate(1.3);
+    }
+    .nav-logo-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem; letter-spacing: 3px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { list-style: none; display: flex; gap: 1.8rem; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.88rem; letter-spacing: 2px; text-transform: uppercase;
+      transition: color 0.2s; padding: 4px 0;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links a:hover { color: var(--gold-light); border-bottom-color: var(--gold); }
+
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 26px; height: 2px;
+      background: var(--gold-light); border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none; flex-direction: column;
+      background: rgba(2,12,27,0.98); border-bottom: 1px solid rgba(212,160,23,0.2);
+      padding: 16px 5vw 24px; gap: 0;
+      position: sticky; top: 64px; z-index: 99;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--muted); text-decoration: none;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem; letter-spacing: 2px; text-transform: uppercase;
+      padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--gold-light); }
+
+    /* ─── LIVE SCOREBOARD ─── */
+    .scoreboard-banner {
+      background: linear-gradient(135deg, #001F5C 0%, #003080 50%, #001F5C 100%);
+      border-bottom: 2px solid var(--gold);
+      padding: 16px 5vw;
+    }
+    .scoreboard-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 14px; flex-wrap: wrap; gap: 8px;
+    }
+    .scoreboard-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold);
+    }
+    .scoreboard-live-pill {
+      background: var(--red); color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 20px;
+      animation: blink 1.2s ease infinite;
+    }
+    .scoreboard-grid {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      gap: 16px; align-items: center;
+    }
+    .score-team {
+      display: flex; flex-direction: column;
+    }
+    .score-team.right { align-items: flex-end; text-align: right; }
+    .score-team-logo {
+      height: 48px; width: 48px; object-fit: contain; margin-bottom: 6px;
+    }
+    .score-team-name {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 1px; line-height: 1;
+    }
+    .score-runs {
+      font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; line-height: 1;
+      color: var(--gold-light);
+    }
+    .score-runs.mi { color: var(--gold-light); }
+    .score-overs {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem;
+      letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-top: 2px;
+    }
+    .score-vs {
+      text-align: center;
+    }
+    .vs-circle {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%; width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--muted);
+      margin: 0 auto 6px;
+    }
+    .score-target {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem; letter-spacing: 2px; color: var(--sky); text-transform: uppercase;
+    }
+    .score-crr {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem; letter-spacing: 1px; color: var(--muted); text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .score-status {
+      margin-top: 14px; padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.82rem; letter-spacing: 2px; color: var(--muted); text-transform: uppercase;
+    }
+    .score-status span { color: var(--gold-light); }
+    .score-progress-bar {
+      margin-top: 10px; height: 4px; background: rgba(255,255,255,0.1);
+      border-radius: 2px; overflow: hidden;
+    }
+    .score-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--sky));
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+
+    /* ─── HERO ─── */
+    #home {
+      min-height: 92vh;
+      background: radial-gradient(ellipse 80% 60% at 60% 40%, #003580 0%, #010810 70%);
+      display: flex; align-items: center;
+      padding: 60px 5vw 0;
+      position: relative; overflow: hidden;
+    }
+    .wave-ring {
+      position: absolute; border-radius: 50%;
+      border: 1px solid rgba(26,143,227,0.15);
+      animation: pulse-ring 4s ease-in-out infinite;
+    }
+    .wave-ring:nth-child(1) { width: 500px; height: 500px; right: -100px; top: 50%; transform: translateY(-50%); animation-delay: 0s; }
+    .wave-ring:nth-child(2) { width: 700px; height: 700px; right: -200px; top: 50%; transform: translateY(-50%); animation-delay: 1s; }
+    .wave-ring:nth-child(3) { width: 900px; height: 900px; right: -300px; top: 50%; transform: translateY(-50%); animation-delay: 2s; }
+    @keyframes pulse-ring { 0%,100%{opacity:.15} 50%{opacity:.35} }
+
+    .hero-content { position: relative; z-index: 2; max-width: 700px; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(212,160,23,0.12); border: 1px solid rgba(212,160,23,0.4);
+      color: var(--gold-light); font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem; letter-spacing: 3px; text-transform: uppercase;
+      padding: 6px 18px; border-radius: 2px; margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 10vw, 9rem);
+      line-height: 0.9; letter-spacing: 2px;
+      animation: fadeUp 0.9s 0.15s ease both;
+    }
+    .hero-title span { color: var(--gold-light); }
+    .hero-sub {
+      margin: 1.5rem 0 2.5rem;
+      font-size: 1.05rem; font-weight: 300; color: var(--muted); line-height: 1.6;
+      animation: fadeUp 1s 0.3s ease both;
+    }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 1s 0.45s ease both; }
+    .hero-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--darker); font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;
+      padding: 14px 40px; text-decoration: none; font-weight: 700; border-radius: 2px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(212,160,23,0.4); }
+    .hero-cta-outline {
+      display: inline-block;
+      border: 1px solid rgba(26,143,227,0.6); color: var(--sky);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;
+      padding: 14px 40px; text-decoration: none; font-weight: 700; border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .hero-cta-outline:hover { background: rgba(26,143,227,0.12); transform: translateY(-3px); }
+
+    .hero-emblem {
+      position: absolute; right: 6vw; top: 50%; transform: translateY(-50%);
+      width: clamp(200px, 26vw, 380px);
+      z-index: 1;
+      animation: float 6s ease-in-out infinite;
+      filter: drop-shadow(0 0 60px rgba(0, 75, 160, 0.5)) drop-shadow(0 0 120px rgba(26,143,227,0.3));
+      opacity: 0.9;
+    }
+    @keyframes float { 0%,100%{transform:translateY(-50%) rotate(-2deg)} 50%{transform:translateY(calc(-50% - 16px)) rotate(2deg)} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ─── SECTION BASE ─── */
+    section { padding: 100px 5vw; }
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      letter-spacing: 1px; line-height: 1; margin-bottom: 3rem;
+    }
+    .section-title em { color: var(--sky); font-style: normal; }
+
+    /* ─── PLAYERS ─── */
+    #players { background: var(--dark); }
+
+    .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2rem; }
+    .filter-tab {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase;
+      padding: 8px 20px; border: 1px solid rgba(122,151,192,0.3);
+      background: transparent; color: var(--muted);
+      cursor: pointer; border-radius: 2px; transition: all 0.2s;
+    }
+    .filter-tab:hover, .filter-tab.active {
+      background: var(--blue); color: var(--white); border-color: var(--blue);
+    }
+
+    .players-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 3px;
+    }
+    .player-card {
+      background: var(--mid); position: relative; overflow: hidden;
+      transition: transform 0.3s; cursor: pointer; border-radius: 2px;
+    }
+    .player-card:hover { transform: scale(1.04); z-index: 2; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+    .player-img-wrap {
+      width: 100%; height: 300px; overflow: hidden; position: relative;
+      background: linear-gradient(135deg, #0A1F3D 0%, #003070 100%);
+      display: flex; align-items: flex-end; justify-content: center;
+    }
+    .player-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
+      display: block; filter: saturate(0.9); transition: filter 0.3s, transform 0.3s;
+    }
+    .player-card:hover .player-img-wrap img { filter: saturate(1.15); transform: scale(1.04); }
+    .player-img-placeholder {
+      width: 100%; height: 300px;
+      background: linear-gradient(135deg, #0A1F3D 0%, #001A50 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    }
+    .player-img-placeholder .jersey {
+      font-family: 'Bebas Neue', sans-serif; font-size: 5rem;
+      color: rgba(212,160,23,0.25); line-height: 1;
+    }
+    .player-img-placeholder .initials {
+      font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem;
+      color: rgba(240,244,255,0.4); line-height: 1;
+    }
+    .player-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(2,12,27,0.97) 60%, transparent);
+      padding: 60px 16px 16px;
+    }
+    .player-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 1px; line-height: 1; }
+    .player-role { font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-top: 3px; }
+    .player-country { font-family: 'Barlow', sans-serif; font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+    .player-number { position: absolute; top: 10px; right: 12px; font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: rgba(212,160,23,0.2); line-height: 1; pointer-events: none; }
+    .player-flag { position: absolute; top: 12px; left: 12px; font-size: 1.1rem; }
+    .player-captain {
+      position: absolute; top: 36px; left: 12px;
+      background: var(--gold); color: var(--darker);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.55rem; letter-spacing: 2px; text-transform: uppercase;
+      padding: 2px 6px; border-radius: 1px; font-weight: 700;
+    }
+
+    /* Player modal */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(1,8,16,0.92); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--mid); border: 1px solid rgba(212,160,23,0.25);
+      max-width: 560px; width: 100%; position: relative;
+      padding: 40px; border-radius: 4px;
+      animation: fadeUp 0.3s ease;
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 20px;
+      background: none; border: none; color: var(--muted);
+      font-size: 1.6rem; cursor: pointer; line-height: 1;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--gold-light); }
+    .modal-name { font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; line-height: 1; }
+    .modal-role { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin: 6px 0 24px; }
+    .modal-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .modal-stat { background: rgba(0,75,160,0.3); padding: 16px 12px; text-align: center; border-radius: 2px; }
+    .modal-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold-light); }
+    .modal-stat-key { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+    .modal-bio { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+    /* ─── SCHEDULE ─── */
+    #schedule { background: var(--darker); }
+    .schedule-wrap { overflow-x: auto; }
+    .schedule-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+    .schedule-table th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); text-align: left; padding: 12px 16px;
+      border-bottom: 1px solid rgba(212,160,23,0.3);
+      white-space: nowrap;
+    }
+    .schedule-table td {
+      padding: 16px 16px; font-size: 0.9rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06); color: var(--muted);
+      white-space: nowrap;
+    }
+    .schedule-table tr:hover td { background: rgba(0,75,160,0.2); color: var(--white); }
+    .schedule-table td:first-child { color: var(--white); font-weight: 500; }
+    .vs-badge {
+      display: inline-block; background: rgba(26,143,227,0.15);
+      color: var(--sky); font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem; letter-spacing: 2px; padding: 3px 8px; border-radius: 2px;
+    }
+    .result-badge {
+      display: inline-block; font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem; letter-spacing: 2px; padding: 4px 10px; border-radius: 2px;
+      white-space: nowrap;
+    }
+    .result-win { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+    .result-loss { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+    .result-upcoming { background: rgba(212,160,23,0.12); color: var(--gold-light); border: 1px solid rgba(212,160,23,0.3); }
+    .result-live { background: rgba(239,68,68,0.2); color: var(--red); border: 1px solid var(--red); animation: blink 1.4s ease infinite; }
+    .home-badge { color: var(--sky); font-size: 0.78rem; }
+    .away-badge { color: var(--muted); font-size: 0.78rem; }
+
+    /* ─── POINTS TABLE ─── */
+    #points { background: var(--dark); }
+    .points-wrap { overflow-x: auto; }
+    .points-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+    .points-table th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); text-align: center; padding: 12px 10px;
+      border-bottom: 1px solid rgba(212,160,23,0.3);
+      white-space: nowrap;
+    }
+    .points-table th:first-child { text-align: left; padding-left: 16px; }
+    .points-table td {
+      padding: 14px 10px; font-size: 0.88rem; text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05); color: var(--muted);
+    }
+    .points-table td:first-child { text-align: left; padding-left: 16px; }
+    .points-table tr.mi-row td { background: rgba(0,75,160,0.22); color: var(--white); }
+    .points-table tr.mi-row td:first-child { color: var(--gold-light); font-weight: 700; }
+    .points-table tr:hover:not(.points-table thead tr) td { background: rgba(0,75,160,0.15); }
+    .points-table .pos { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--muted); }
+    .points-table .pos.qual { color: var(--green); }
+    .points-table .pos.elim { color: var(--red); }
+    .pts-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--gold-light); }
+    .form-mini { display: flex; gap: 3px; justify-content: center; }
+    .fm { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 0.65rem; }
+    .fm.W { background: rgba(34,197,94,0.2); color: var(--green); border: 1px solid var(--green); }
+    .fm.L { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid var(--red); }
+    .fm.nr { background: rgba(122,151,192,0.15); color: var(--muted); border: 1px solid var(--muted); }
+    .nrr-pos { color: var(--green); }
+    .nrr-neg { color: var(--red); }
+    .team-cell { display: flex; align-items: center; gap: 10px; }
+    .team-logo-sm { height: 28px; width: 28px; object-fit: contain; }
+
+    /* ─── STATS ─── */
+    #stats {
+      background: linear-gradient(135deg, #004BA0 0%, #002050 100%);
+      position: relative; overflow: hidden;
+    }
+    #stats::before {
+      content: 'MI'; position: absolute; right: -2vw; top: 50%; transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 35vw; color: rgba(255,255,255,0.04); line-height: 1;
+      pointer-events: none; user-select: none;
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1px; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .stat-block {
+      background: rgba(0,75,160,0.5); padding: 40px 30px; text-align: center;
+      transition: background 0.3s;
+    }
+    .stat-block:hover { background: rgba(0,75,160,0.85); }
+    .stat-number { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 5.5rem); color: var(--gold-light); line-height: 1; }
+    .stat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(240,244,255,0.6); margin-top: 8px; }
+
+    /* ─── NEWS ─── */
+    #news { background: var(--dark); }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2px; }
+    .news-card {
+      background: var(--mid); padding: 28px 24px;
+      border-left: 3px solid transparent;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .news-card:hover { border-left-color: var(--gold); background: #0D2548; }
+    .news-date { font-family: 'Barlow Condensed', sans-serif; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+    .news-tag { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; background: rgba(0,75,160,0.3); color: var(--sky); padding: 3px 10px; border-radius: 2px; margin: 8px 0; }
+    .news-headline { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; line-height: 1.1; letter-spacing: 0.5px; margin-bottom: 10px; }
+    .news-body { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .news-readmore { background: none; border: none; color: var(--sky); font-family: 'Barlow Condensed', sans-serif; font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-top: 14px; padding: 0; transition: color 0.2s; }
+    .news-readmore:hover { color: var(--gold-light); }
+
+    /* ─── POLL ─── */
+    #poll { background: var(--darker); }
+    .poll-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .poll-box { background: var(--mid); padding: 36px; border-radius: 2px; }
+    .poll-question { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; margin-bottom: 24px; line-height: 1.1; }
+    .poll-option { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .poll-option label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.9rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; }
+    .poll-option input { accent-color: var(--gold); transform: scale(1.3); cursor: pointer; }
+    .poll-btn {
+      margin-top: 24px; width: 100%; padding: 14px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      border: none; color: var(--darker); font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 700;
+      cursor: pointer; border-radius: 2px; transition: opacity 0.2s;
+    }
+    .poll-btn:hover { opacity: 0.9; }
+    #poll-result { margin-top: 14px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; letter-spacing: 1px; display: none; color: var(--gold-light); }
+    .poll-results { background: var(--mid); padding: 36px; border-radius: 2px; }
+    .poll-results h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 1px; margin-bottom: 24px; }
+    .bar-item { margin-bottom: 20px; }
+    .bar-label { display: flex; justify-content: space-between; font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; color: var(--white); }
+    .bar-label span { color: var(--gold-light); }
+    .bar-track { background: rgba(255,255,255,0.07); border-radius: 2px; height: 8px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--sky)); border-radius: 2px; transition: width 0.8s ease; }
+
+    /* ─── FORUM ─── */
+    #forum { background: var(--dark); }
+    .forum-compose { background: var(--mid); padding: 36px; border-radius: 2px; margin-bottom: 2rem; }
+    .forum-compose h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 1px; margin-bottom: 20px; }
+    .forum-compose input, .forum-compose textarea {
+      width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white); font-family: 'Barlow', sans-serif; font-size: 0.9rem;
+      padding: 12px 16px; margin-bottom: 12px; border-radius: 2px;
+      transition: border-color 0.2s;
+    }
+    .forum-compose input:focus, .forum-compose textarea:focus { outline: none; border-color: rgba(212,160,23,0.5); }
+    .forum-compose textarea { height: 100px; resize: vertical; }
+    .forum-post-btn {
+      background: var(--blue); color: var(--white); border: none;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; letter-spacing: 3px;
+      text-transform: uppercase; padding: 12px 32px; cursor: pointer; border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .forum-post-btn:hover { background: var(--sky); }
+    .forum-list { display: flex; flex-direction: column; gap: 2px; }
+    .forum-item { background: var(--mid); padding: 22px 24px; border-radius: 2px; border-left: 2px solid transparent; transition: border-color 0.2s; }
+    .forum-item:hover { border-left-color: var(--blue); }
+    .forum-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 10px; }
+    .forum-author { font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-light); }
+    .forum-time { font-size: 0.78rem; color: var(--muted); }
+    .forum-text { font-size: 0.92rem; color: var(--white); line-height: 1.55; margin-bottom: 12px; }
+    .forum-like { background: none; border: 1px solid rgba(255,255,255,0.1); color: var(--muted); font-size: 0.78rem; padding: 5px 14px; cursor: pointer; border-radius: 20px; transition: all 0.2s; }
+    .forum-like:hover, .forum-like.liked { border-color: var(--gold); color: var(--gold-light); background: rgba(212,160,23,0.1); }
+
+    /* ─── SOCIAL ─── */
+    #social { background: var(--darker); }
+    .social-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .social-card {
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 32px 24px; text-align: center;
+      text-decoration: none; color: var(--white);
+      transition: transform 0.2s, background 0.2s; border-radius: 2px;
+    }
+    .social-card:hover { transform: translateY(-4px); }
+    .social-card.twitter:hover { background: rgba(29,155,240,0.12); border-color: rgba(29,155,240,0.4); }
+    .social-card.instagram:hover { background: rgba(225,48,108,0.12); border-color: rgba(225,48,108,0.4); }
+    .social-card.facebook:hover { background: rgba(24,119,242,0.12); border-color: rgba(24,119,242,0.4); }
+    .social-card.youtube:hover { background: rgba(255,0,0,0.12); border-color: rgba(255,0,0,0.4); }
+    .social-icon { font-size: 2.2rem; margin-bottom: 12px; }
+    .social-handle { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+    .social-followers { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; margin-top: 6px; color: var(--gold-light); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #010810;
+      border-top: 1px solid rgba(212,160,23,0.15);
+      padding: 48px 5vw 32px;
+    }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .footer-brand-logo { height: 44px; }
+    .footer-brand-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 3px; color: var(--gold); }
+    .footer-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.65; max-width: 320px; }
+    .footer-col-title { font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 24px; }
+    .footer-copy { font-size: 0.82rem; color: var(--muted); }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--darker); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+
+    /* ─── SCROLL TO TOP ─── */
+    #scroll-top {
+      position: fixed; bottom: 28px; right: 28px;
+      background: var(--blue); color: var(--white);
+      width: 44px; height: 44px; border: none; border-radius: 50%;
+      font-size: 1.2rem; cursor: pointer; z-index: 99;
+      display: none; align-items: center; justify-content: center;
+      transition: background 0.2s; box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+    #scroll-top:hover { background: var(--sky); }
+    #scroll-top.visible { display: flex; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 70px 5vw; }
+      .poll-wrap { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 28px; }
+      .hero-emblem { opacity: 0.15; width: 220px; }
+      .scoreboard-grid { grid-template-columns: 1fr auto 1fr; gap: 8px; }
+      .score-runs { font-size: 1.8rem; }
+      .score-team-name { font-size: 1.1rem; }
+    }
+    @media (max-width: 480px) {
+      .players-grid { grid-template-columns: 1fr 1fr; }
+      .players-grid .player-img-wrap { height: 220px; }
+      .players-grid .player-img-placeholder { height: 220px; }
+      .social-grid { grid-template-columns: 1fr 1fr; }
+      .hero-buttons { flex-direction: column; }
+      .score-team-logo { height: 36px; width: 36px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LIVE TICKER -->
+  <div class="live-ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item"><span class="ticker-live">LIVE</span> MI vs RR — 14.2 Overs — <span class="ticker-gold">MI 128/3</span> · Target: 182</span>
+      <span class="ticker-item">🏆 Bumrah claims his <span class="ticker-gold">150th IPL wicket</span> · All-time record</span>
+      <span class="ticker-item">📅 Next: MI vs RCB — Chinnaswamy, 22 May · 7:30 PM IST</span>
+      <span class="ticker-item">💛 SKY scores <span class="ticker-gold">61*</span> off 29 balls vs RR — Wankhede roars</span>
+      <span class="ticker-item"><span class="ticker-live">BREAKING</span> Hardik Pandya — MI Captain IPL 2026</span>
+      <span class="ticker-item">📊 MI SEASON RECORD: <span class="ticker-gold">4W · 8L</span> — 9th in Points Table</span>
+      <span class="ticker-item">🧤 Ryan Rickelton joins squad · Quinton de Kock retained</span>
+      <span class="ticker-item">⚡ Deepak Chahar & Keshav Maharaj bolster the bowling attack in 2026</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo-wrap" href="#home">
+      <img class="nav-logo-img"
+           src="https://documents.iplt20.com/ipl/MI/Logos/Logooutline/MIoutline.png"
+           onerror="this.style.display='none'"
+           alt="MI Logo" />
+      <span class="nav-logo-text">MI Fan Hub</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#scoreboard">Live</a></li>
+      <li><a href="#players">Squad</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#points">Points</a></li>
+      <li><a href="#stats">Stats</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#poll">Poll</a></li>
+      <li><a href="#forum">Forum</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#home" onclick="closeMenu()">Home</a>
+    <a href="#scoreboard" onclick="closeMenu()">Live Score</a>
+    <a href="#players" onclick="closeMenu()">Squad</a>
+    <a href="#schedule" onclick="closeMenu()">Schedule</a>
+    <a href="#points" onclick="closeMenu()">Points Table</a>
+    <a href="#stats" onclick="closeMenu()">Stats</a>
+    <a href="#news" onclick="closeMenu()">News</a>
+    <a href="#poll" onclick="closeMenu()">Poll</a>
+    <a href="#forum" onclick="closeMenu()">Forum</a>
+  </div>
+
+  <!-- LIVE SCOREBOARD -->
+  <div class="scoreboard-banner" id="scoreboard">
+    <div class="scoreboard-header">
+      <div class="scoreboard-title">📍 Wankhede Stadium, Mumbai · IPL 2026 Match 42</div>
+      <div class="scoreboard-live-pill">● LIVE</div>
+    </div>
+    <div class="scoreboard-grid">
+      <!-- MI (batting) -->
+      <div class="score-team">
+        <img class="score-team-logo"
+             src="https://documents.iplt20.com/ipl/MI/Logos/Logooutline/MIoutline.png"
+             onerror="this.style.cssText='height:42px;width:42px;display:flex;align-items:center;justify-content:center;'"
+             alt="MI" />
+        <div class="score-team-name">Mumbai Indians</div>
+        <div class="score-runs mi">128/3</div>
+        <div class="score-overs">14.2 overs</div>
+      </div>
+
+      <!-- Center -->
+      <div class="score-vs">
+        <div class="vs-circle">VS</div>
+        <div class="score-target">Target: 182</div>
+        <div class="score-crr">CRR: 8.93</div>
+        <div class="score-crr" style="color:var(--gold-light); margin-top:4px;">Need 54 off 34</div>
+      </div>
+
+      <!-- RR (bowled) -->
+      <div class="score-team right">
+        <img class="score-team-logo"
+             src="https://documents.iplt20.com/ipl/RR/Logos/RR_Logo.png"
+             onerror="this.style.display='none'"
+             alt="RR" style="margin-left:auto;" />
+        <div class="score-team-name">Rajasthan Royals</div>
+        <div class="score-runs" style="color:var(--white)">181/7</div>
+        <div class="score-overs">20 overs</div>
+      </div>
+    </div>
+
+    <!-- Progress bar: 14.2/20 = 71% -->
+    <div class="score-progress-bar">
+      <div class="score-progress-fill" style="width:71.7%"></div>
+    </div>
+
+    <div class="score-status">
+      Batting: <span>SKY 61* (29)</span> &nbsp;·&nbsp; <span>Tilak 24* (18)</span>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      Last Wkt: <span>Rohit 44 (32)</span>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      Bowling: <span>Chahal 2/28</span>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section id="home">
+    <div class="wave-ring"></div>
+    <div class="wave-ring"></div>
+    <div class="wave-ring"></div>
+    <img class="hero-emblem"
+         src="https://documents.iplt20.com/ipl/MI/Logos/Logooutline/MIoutline.png"
+         onerror="this.src='https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/Mumbai_Indians_Logo.svg/1200px-Mumbai_Indians_Logo.svg.png'"
+         alt="MI Logo" />
+    <div class="hero-content">
+      <div class="hero-badge">🏆 5× IPL Champions · Paltan Forever</div>
+      <h1 class="hero-title">MUMBAI<br/><span>INDIANS</span></h1>
+      <p class="hero-sub">One Family. One Dream. The Spirit of Mumbai runs through every delivery, every boundary, every roar of the crowd. We are the Paltan.</p>
+      <div class="hero-buttons">
+        <a class="hero-cta" href="#players">Explore the Squad</a>
+        <a class="hero-cta-outline" href="#schedule">View Schedule</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAYERS (2026 Full Squad) -->
+  <section id="players">
+    <div class="section-label">The Star MI PLAYERS · IPL 2026</div>
+    <h2 class="section-title">Meet the <em>Players</em></h2>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterPlayers('all', this)">All</button>
+      <button class="filter-tab" onclick="filterPlayers('batter', this)">Batters</button>
+      <button class="filter-tab" onclick="filterPlayers('bowler', this)">Bowlers</button>
+      <button class="filter-tab" onclick="filterPlayers('allrounder', this)">All-rounders</button>
+    </div>
+    <div class="players-grid" id="players-grid">
+
+      <!-- BATTERS -->
+      <div class="player-card" data-role="batter" onclick="openModal('rohit')">
+        <span class="player-number">45</span>
+        <span class="player-flag">🇮🇳</span>
+        <div class="player-img-wrap">
+        <img src="images/rohit.jpg"
+     onerror="this.parentNode.innerHTML='<div class=\'player-img-placeholder\'><div class=\'jersey\'>45</div><div class=\'initials\'>RS</div></div>'"
+     alt="Rohit Sharma" />
+        </div>
+        <div class="player-info">
+          <div class="player-name">Rohit Sharma</div>
+          <div class="player-role">Opening Batter</div>
+          <div class="player-country">India</div>
+        </div>
+      </div>
+
+      <div class="player-card" data-role="batter" onclick="openModal('sky')">
+        <span class="player-number">7</span>
+        <span class="player-flag">🇮🇳</span>
+        <div class="player-img-wrap">
+          <img src="images/sky.jpg"
+     onerror="this.parentNode.innerHTML='<div class=\'player-img-placeholder\'><div class=\'jersey\'>7</div><div class=\'initials\'>SKY</div></div>'"
+     alt="Suryakumar Yadav" />
+
+        </div>
+        <div class="player-info">
+          <div class="player-name">Suryakumar Yadav</div>
+          <div class="player-role">Middle Order · T20 No.1</div>
+          <div class="player-country">India</div>
+        </div>
+      </div>
+
+      <div class="player-card" data-role="batter" onclick="openModal('tilak')">
+        <span class="player-number">8</span>
+        <span class="player-flag">🇮🇳</span>
+        <div class="player-img-wrap">
+        <img src="images/tilak.jpg"
+     onerror="this.parentNode.innerHTML='<div class=\'player-img-placeholder\'><div class=\'jersey\'>8</div><div class=\'initials\'>TV</div></div>'"
+     alt="Tilak Varma" />
+        </div>
+        <div class="player-info">
+          <div class="player-name">Tilak Varma</div>
+          <div class="player-role">Middle Order · Left-hand</div>
+          <div class="player-country">India</div>
+        </div>
+      </div> 
+      <!-- ALL-ROUNDERS -->
+      <div class="player-card" data-role="allrounder" onclick="openModal('hardik')">
+        <span class="player-number">33</span>
+        <span class="player-flag">🇮🇳</span>
+        <span class="player-captain">CAPTAIN</span>
+        <div class="player-img-wrap">
+        <img src="images/hardik.jpg"
+     onerror="this.parentNode.innerHTML='<div class=\'player-img-placeholder\'><div class=\'jersey\'>33</div><div class=\'initials\'>HP</div></div>'"
+     alt="Hardik Pandya" />
+  
+        </div>
+        <div class="player-info">
+          <div class="player-name">Hardik Pandya</div>
+          <div class="player-role">Captain · All-rounder</div>
+          <div class="player-country">India</div>
+        </div>
+      </div> 
+
+      <!-- BOWLERS -->
+      <div class="player-card" data-role="bowler" onclick="openModal('bumrah')">
+        <span class="player-number">93</span>
+        <span class="player-flag">🇮🇳</span>
+        <div class="player-img-wrap">
+        <img src="images/bumrah.jpg"
+     onerror="this.parentNode.innerHTML='<div class=\'player-img-placeholder\'><div class=\'jersey\'>93</div><div class=\'initials\'>JB</div></div>'"
+     alt="Jasprit Bumrah" />  
+        </div>
+        <div class="player-info">
+          <div class="player-name">Jasprit Bumrah</div>
+          <div class="player-role">Pace Bowler · World No.1</div>
+          <div class="player-country">India</div>
+        </div>
+      </div>
+
+      <div class="player-card" data-role="bowler" onclick="openModal('boult')">
+        <span class="player-number">6</span>
+        <span class="player-flag">🇳🇿</span>
+        <div class="player-img-wrap">
+        <img src="images/boult.jpg"
+     onerror="this.parentNode.innerHTML='<div class=\'player-img-placeholder\'><div class=\'jersey\'>6</div><div class=\'initials\'>TB</div></div>'"
+     alt="Trent Boult" />   
+        </div>
+        <div class="player-info">
+          <div class="player-name">Trent Boult</div>
+          <div class="player-role">Pace Bowler · Swing King</div>
+          <div class="player-country">New Zealand</div>
+        </div>
+      </div> 
+    </div>
+  </section>
+
+  <!-- PLAYER MODAL -->
+  <div class="modal-overlay" id="player-modal" onclick="closeModalOnOverlay(event)">
+    <div class="modal" id="modal-content">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- SCHEDULE -->
+  <section id="schedule">
+    <div class="section-label">Fixtures · IPL 2026</div>
+    <h2 class="section-title">Upcoming <em>Matches</em></h2>
+    <div class="schedule-wrap">
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Opponent</th>
+          <th>Venue</th>
+          <th>H/A</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Apr 22, 2026</td>
+          <td><span class="vs-badge">VS</span>&nbsp; Delhi Capitals</td>
+          <td>Wankhede, Mumbai</td>
+          <td><span class="home-badge">🏠 Home</span></td>
+          <td><span class="result-badge result-win">W · by 28 runs</span></td>
+        </tr>
+        <tr>
+          <td>Apr 26, 2026</td>
+          <td><span class="vs-badge">VS</span>&nbsp; Sunrisers Hyderabad</td>
+          <td>Wankhede, Mumbai</td>
+          <td><span class="home-badge">🏠 Home</span></td>
+          <td><span class="result-badge result-win">W · by 5 wkts</span></td>
+        </tr>
+        <tr>
+          <td>Apr 30, 2026</td>
+          <td><span class="vs-badge">VS</span>&nbsp; Chennai Super Kings</td>
+          <td>MA Chidambaram, Chennai</td>
+          <td><span class="away-badge">✈ Away</span></td>
+          <td><span class="result-badge result-loss">L · by 11 runs</span></td>
+        </tr>
+        <tr>
+          <td>May 4, 2026</td>
+          <td><span class="vs-badge">VS</span>&nbsp; Kolkata Knight Riders</td>
+          <td>Eden Gardens, Kolkata</td>
+          <td><span class="away-badge">✈ Away</span></td>
+          <td><span class="result-badge result-loss">L · by 7 wkts</span></td>
+        </tr>
+        <tr>
+          <td>May 9, 2026</td>
+          <td><span class="vs-badge">VS</span>&nbsp; Punjab Kings</td>
+          <td>Wankhede, Mumbai</td>
+          <td><span class="home-badge">🏠 Home</span></td>
+          <td><span class="result-badge result-win">W · by 3 wkts</span></td>
+        </tr>
+        <tr>
+          <td>May 14, 2026</td>
+          <td><span class="vs-badge">VS</span>&nbsp; Gujarat Titans</td>
+          <td>Narendra Modi Stadium, Ahm.</td>
+          <td><span class="away-badge">✈ Away</span></td>
+          <td><span class="result-badge result-win">W · by 20 runs</span></td>
+        </tr>
+        <tr>
+          <td>May 19, 2026</td>
+          <td><span class="vs-badge">VS</span>&nbsp; Rajasthan Royals</td>
+          <td>Wankhede, Mumbai</td>
+          <td><span class="home-badge">🏠 Home</span></td>
+          <td><span class="result-badge result-live">● LIVE NOW</span></td>
+        </tr>
+        <tr>
+          <td>May 22, 2026</td>
+          <td><span class="vs-badge">VS</span>&nbsp; Royal Challengers Bengaluru</td>
+          <td>M. Chinnaswamy, Bengaluru</td>
+          <td><span class="away-badge">✈ Away</span></td>
+          <td><span class="result-badge result-upcoming">Upcoming</span></td>
+        </tr>
+        <tr>
+          <td>May 26, 2026</td>
+          <td><span class="vs-badge">VS</span>&nbsp; Lucknow Super Giants</td>
+          <td>Wankhede, Mumbai</td>
+          <td><span class="home-badge">🏠 Home</span></td>
+          <td><span class="result-badge result-upcoming">Upcoming</span></td>
+        </tr>
+        <tr>
+          <td>Jun 1, 2026</td>
+          <td><span class="vs-badge">VS</span>&nbsp; Kolkata Knight Riders</td>
+          <td>Wankhede, Mumbai</td>
+          <td><span class="home-badge">🏠 Home</span></td>
+          <td><span class="result-badge result-upcoming">Upcoming</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- POINTS TABLE -->
+  <section id="points">
+    <div class="section-label">IPL 2026 · Updated Live</div>
+    <h2 class="section-title">Points <em>Table</em></h2>
+    <div class="points-wrap">
+    <table class="points-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th style="text-align:left; padding-left:16px;">Team</th>
+          <th>P</th>
+          <th>W</th>
+          <th>L</th>
+          <th>NR</th>
+          <th>NRR</th>
+          <th>Pts</th>
+          <th>Form</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="pos qual">1</span></td>
+          <td><div class="team-cell"><img class="team-logo-sm" src="https://documents.iplt20.com/ipl/CSK/logos/Logooutline/CSKoutline.png" onerror="this.style.display='none'" alt="CSK">Chennai Super Kings</div></td>
+          <td>13</td><td>9</td><td>4</td><td>0</td>
+          <td class="nrr-pos">+0.741</td>
+          <td><span class="pts-val">18</span></td>
+          <td><div class="form-mini"><span class="fm W">W</span><span class="fm W">W</span><span class="fm L">L</span><span class="fm W">W</span><span class="fm W">W</span></div></td>
+        </tr>
+        <tr>
+          <td><span class="pos qual">2</span></td>
+          <td><div class="team-cell"><img class="team-logo-sm" src="https://documents.iplt20.com/ipl/RCB/Logos/Logooutline/RCBoutline.png" onerror="this.style.display='none'" alt="RCB">Royal Challengers B</div></td>
+          <td>13</td><td>8</td><td>5</td><td>0</td>
+          <td class="nrr-pos">+0.512</td>
+          <td><span class="pts-val">16</span></td>
+          <td><div class="form-mini"><span class="fm L">L</span><span class="fm W">W</span><span class="fm W">W</span><span class="fm W">W</span><span class="fm L">L</span></div></td>
+        </tr>
+        <tr>
+          <td><span class="pos qual">3</span></td>
+          <td><div class="team-cell"><img class="team-logo-sm" src="https://documents.iplt20.com/ipl/GT/Logos/Logooutline/GToutline.png" onerror="this.style.display='none'" alt="GT">Gujarat Titans</div></td>
+          <td>13</td><td>8</td><td>5</td><td>0</td>
+          <td class="nrr-pos">+0.388</td>
+          <td><span class="pts-val">16</span></td>
+          <td><div class="form-mini"><span class="fm W">W</span><span class="fm L">L</span><span class="fm W">W</span><span class="fm W">W</span><span class="fm W">W</span></div></td>
+        </tr>
+        <tr>
+          <td><span class="pos qual">4</span></td>
+          <td><div class="team-cell"><img class="team-logo-sm" src="https://documents.iplt20.com/ipl/KKR/Logos/Logooutline/KKRoutline.png" onerror="this.style.display='none'" alt="KKR">Kolkata Knight Riders</div></td>
+          <td>13</td><td>7</td><td>6</td><td>0</td>
+          <td class="nrr-pos">+0.295</td>
+          <td><span class="pts-val">14</span></td>
+          <td><div class="form-mini"><span class="fm W">W</span><span class="fm W">W</span><span class="fm L">L</span><span class="fm W">W</span><span class="fm L">L</span></div></td>
+        </tr>
+        <tr>
+          <td><span class="pos">5</span></td>
+          <td><div class="team-cell"><img class="team-logo-sm" src="https://documents.iplt20.com/ipl/RR/Logos/RR_Logo.png" onerror="this.style.display='none'" alt="RR">Rajasthan Royals</div></td>
+          <td>12</td><td>7</td><td>5</td><td>0</td>
+          <td class="nrr-pos">+0.112</td>
+          <td><span class="pts-val">14</span></td>
+          <td><div class="form-mini"><span class="fm W">W</span><span class="fm L">L</span><span class="fm W">W</span><span class="fm L">L</span><span class="fm W">W</span></div></td>
+        </tr>
+        <tr>
+          <td><span class="pos">6</span></td>
+          <td><div class="team-cell"><img class="team-logo-sm" src="https://documents.iplt20.com/ipl/PBKS/Logos/Logooutline/PBKSoutline.png" onerror="this.style.display='none'" alt="PBKS">Punjab Kings</div></td>
+          <td>13</td><td>6</td><td>7</td><td>0</td>
+          <td class="nrr-neg">-0.056</td>
+          <td><span class="pts-val">12</span></td>
+          <td><div class="form-mini"><span class="fm L">L</span><span class="fm W">W</span><span class="fm L">L</span><span class="fm W">W</span><span class="fm L">L</span></div></td>
+        </tr>
+        <tr>
+          <td><span class="pos">7</span></td>
+          <td><div class="team-cell"><img class="team-logo-sm" src="https://documents.iplt20.com/ipl/SRH/Logos/Logooutline/SRHoutline.png" onerror="this.style.display='none'" alt="SRH">Sunrisers Hyderabad</div></td>
+          <td>13</td><td>6</td><td>7</td><td>0</td>
+          <td class="nrr-neg">-0.143</td>
+          <td><span class="pts-val">12</span></td>
+          <td><div class="form-mini"><span class="fm L">L</span><span class="fm L">L</span><span class="fm W">W</span><span class="fm L">L</span><span class="fm W">W</span></div></td>
+        </tr>
+        <tr>
+          <td><span class="pos">8</span></td>
+          <td><div class="team-cell"><img class="team-logo-sm" src="https://documents.iplt20.com/ipl/DC/Logos/LogoOutline/DCoutline.png" onerror="this.style.display='none'" alt="DC">Delhi Capitals</div></td>
+          <td>13</td><td>5</td><td>8</td><td>0</td>
+          <td class="nrr-neg">-0.218</td>
+          <td><span class="pts-val">10</span></td>
+          <td><div class="form-mini"><span class="fm L">L</span><span class="fm W">W</span><span class="fm L">L</span><span class="fm L">L</span><span class="fm W">W</span></div></td>
+        </tr>
+        <tr class="mi-row">
+          <td><span class="pos elim">9</span></td>
+          <td><div class="team-cell"><img class="team-logo-sm" src="https://documents.iplt20.com/ipl/MI/Logos/Logooutline/MIoutline.png" onerror="this.style.display='none'" alt="MI">Mumbai Indians ★</div></td>
+          <td>12</td><td>4</td><td>8</td><td>0</td>
+          <td class="nrr-neg">-0.504</td>
+          <td><span class="pts-val" style="color:var(--red)">8</span></td>
+          <td><div class="form-mini"><span class="fm W">W</span><span class="fm W">W</span><span class="fm L">L</span><span class="fm L">L</span><span class="fm W">W</span></div></td>
+        </tr>
+        <tr>
+          <td><span class="pos elim">10</span></td>
+          <td><div class="team-cell"><img class="team-logo-sm" src="https://documents.iplt20.com/ipl/LSG/Logos/Logooutline/LSGoutline.png" onerror="this.style.display='none'" alt="LSG">Lucknow Super Giants</div></td>
+          <td>13</td><td>3</td><td>10</td><td>0</td>
+          <td class="nrr-neg">-0.912</td>
+          <td><span class="pts-val" style="color:var(--red)">6</span></td>
+          <td><div class="form-mini"><span class="fm L">L</span><span class="fm L">L</span><span class="fm L">L</span><span class="fm W">W</span><span class="fm L">L</span></div></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;letter-spacing:2px;color:var(--muted);margin-top:16px;text-transform:uppercase;">★ Mumbai Indians row highlighted &nbsp;·&nbsp; Top 4 qualify for playoffs</p>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="section-label">All Time · MI Legacy</div>
+    <h2 class="section-title">Team <em>Statistics</em></h2>
+    <div class="stats-grid">
+      <div class="stat-block"><div class="stat-number">5</div><div class="stat-label">IPL Titles</div></div>
+      <div class="stat-block"><div class="stat-number">17</div><div class="stat-label">Seasons Played</div></div>
+      <div class="stat-block"><div class="stat-number">120+</div><div class="stat-label">Total Wins</div></div>
+      <div class="stat-block"><div class="stat-number">235</div><div class="stat-label">Highest Score</div></div>
+      <div class="stat-block"><div class="stat-number">5</div><div class="stat-label">Finals Played</div></div>
+      <div class="stat-block"><div class="stat-number">2008</div><div class="stat-label">Founded</div></div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section id="news">
+    <div class="section-label">Latest</div>
+    <h2 class="section-title">MI <em>News</em></h2>
+    <div class="news-grid">
+      <div class="news-card">
+        <div class="news-date">May 19, 2026</div>
+        <div class="news-tag">● Live Match</div>
+        <div class="news-headline">SKY fires 61* as MI chase 182 vs RR</div>
+        <p class="news-body">Suryakumar Yadav is at his imperious best at Wankhede, guiding MI's chase with a blazing half-century as Rohit provides a solid platform at the top.</p>
+        <button class="news-readmore">Read More →</button>
+      </div>
+      <div class="news-card">
+        <div class="news-date">May 14, 2026</div>
+        <div class="news-tag">Match Report</div>
+        <div class="news-headline">Bumrah's five-fer stuns SRH at Wankhede</div>
+        <p class="news-body">Jasprit Bumrah delivered a masterclass in pace bowling, dismantling Sunrisers' lineup to guide Mumbai to a commanding victory at home.</p>
+        <button class="news-readmore">Read More →</button>
+      </div>
+      <div class="news-card">
+        <div class="news-date">May 11, 2026</div>
+        <div class="news-tag">Player Feature</div>
+        <div class="news-headline">SKY smashes record-breaking century at Wankhede</div>
+        <p class="news-body">Suryakumar Yadav lit up Wankhede Stadium with an extraordinary 360-degree innings — four sixes in one over left the crowd breathless.</p>
+        <button class="news-readmore">Read More →</button>
+      </div>
+      <div class="news-card">
+        <div class="news-date">May 8, 2026</div>
+        <div class="news-tag">Team Update</div>
+        <div class="news-headline">Will Jacks added to the 2026 squad — overseas star</div>
+        <p class="news-body">England all-rounder Will Jacks joins the Mumbai Indians for IPL 2026 bringing explosive batting and versatile off-spin in the middle overs.</p>
+        <button class="news-readmore">Read More →</button>
+      </div>
+      <div class="news-card">
+        <div class="news-date">May 3, 2026</div>
+        <div class="news-tag">Milestone</div>
+        <div class="news-headline">Bumrah reaches 150 IPL wickets</div>
+        <p class="news-body">Jasprit Bumrah became the fastest bowler to take 150 IPL wickets — an all-time record in breathtaking style at Wankhede.</p>
+        <button class="news-readmore">Read More →</button>
+      </div>
+      <div class="news-card">
+        <div class="news-date">Apr 28, 2026</div>
+        <div class="news-tag">Preview</div>
+        <div class="news-headline">Ryan Rickelton on debut — new face behind the stumps</div>
+        <p class="news-body">South African wicket-keeper Ryan Rickelton made his IPL debut for MI, impressing with both bat and gloves to cement his place in the playing XI.</p>
+        <button class="news-readmore">Read More →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- POLL -->
+  <section id="poll">
+    <div class="section-label">Fan Voice · 2026</div>
+    <h2 class="section-title">Cast Your <em>Vote</em></h2>
+    <div class="poll-wrap">
+      <div class="poll-box">
+        <div class="poll-question">Who is your favourite MI player in 2026?</div>
+        <div class="poll-option"><input type="radio" name="player" id="p1" value="Rohit Sharma" /><label for="p1">Rohit Sharma</label></div>
+        <div class="poll-option"><input type="radio" name="player" id="p2" value="Jasprit Bumrah" /><label for="p2">Jasprit Bumrah</label></div>
+        <div class="poll-option"><input type="radio" name="player" id="p3" value="Suryakumar Yadav" /><label for="p3">Suryakumar Yadav</label></div>
+        <div class="poll-option"><input type="radio" name="player" id="p4" value="Hardik Pandya" /><label for="p4">Hardik Pandya (Captain)</label></div>
+        <div class="poll-option"><input type="radio" name="player" id="p5" value="Tilak Varma" /><label for="p5">Tilak Varma</label></div>
+        <button class="poll-btn" onclick="submitPoll()">Submit Vote</button>
+        <div id="poll-result"></div>
+      </div>
+      <div class="poll-results">
+        <h3>Fan Favourites · Live Results</h3>
+        <div id="poll-bars">
+          <div class="bar-item">
+            <div class="bar-label">Rohit Sharma <span id="pct-1">34%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:34%"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Jasprit Bumrah <span id="pct-2">28%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:28%"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Suryakumar Yadav <span id="pct-3">22%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:22%"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Hardik Pandya <span id="pct-4">11%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:11%"></div></div>
+          </div>
+          <div class="bar-item">
+            <div class="bar-label">Tilak Varma <span id="pct-5">5%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:5%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORUM -->
+  <section id="forum">
+    <div class="section-label">Fan Zone</div>
+    <h2 class="section-title">Fan <em>Forum</em></h2>
+    <div class="forum-compose">
+      <h3>Join the Conversation</h3>
+      <input type="text" id="forum-name" placeholder="Your name" maxlength="30" />
+      <textarea id="forum-msg" placeholder="Share your thoughts, predictions, match reactions…" maxlength="300"></textarea>
+      <button class="forum-post-btn" onclick="postComment()">Post Comment</button>
+    </div>
+    <div class="forum-list" id="forum-list">
+      <div class="forum-item">
+        <div class="forum-meta">
+          <span class="forum-author">@MumbaiPride</span>
+          <span class="forum-time">2 mins ago</span>
+        </div>
+        <div class="forum-text">SKY is on fire today! 61 off 29 is just insane. Wankhede going WILD right now 🔥💙</div>
+        <button class="forum-like" onclick="toggleLike(this)">💙 12 Likes</button>
+      </div>
+      <div class="forum-item">
+        <div class="forum-meta">
+          <span class="forum-author">@PaltanForever</span>
+          <span class="forum-time">8 mins ago</span>
+        </div>
+        <div class="forum-text">Bumrah's yorkers in the death overs are something else. The man is from another planet. 150 wickets!!</div>
+        <button class="forum-like" onclick="toggleLike(this)">💙 27 Likes</button>
+      </div>
+      <div class="forum-item">
+        <div class="forum-meta">
+          <span class="forum-author">@BlueArmyMI</span>
+          <span class="forum-time">15 mins ago</span>
+        </div>
+        <div class="forum-text">Hardik's captaincy this season has been top class. Very shrewd with field placements. Proud paltan!</div>
+        <button class="forum-like" onclick="toggleLike(this)">💙 19 Likes</button>
+      </div>
+      <div class="forum-item">
+        <div class="forum-meta">
+          <span class="forum-author">@WankheedeRoars</span>
+          <span class="forum-time">22 mins ago</span>
+        </div>
+        <div class="forum-text">Will Jacks has been a revelation! That century against KKR was absolutely sensational. What a signing! 🏏</div>
+        <button class="forum-like" onclick="toggleLike(this)">💙 8 Likes</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL -->
+  <section id="social">
+    <div class="section-label">Follow MI</div>
+    <h2 class="section-title">Stay <em>Connected</em></h2>
+    <div class="social-grid">
+      <a class="social-card twitter" href="https://twitter.com/mipaltan" target="_blank" rel="noopener">
+        <div class="social-icon">𝕏</div>
+        <div class="social-handle">@mipaltan</div>
+        <div class="social-followers">12.4M</div>
+      </a>
+      <a class="social-card instagram" href="https://www.instagram.com/mumbaiindians" target="_blank" rel="noopener">
+        <div class="social-icon">📸</div>
+        <div class="social-handle">@mumbaiindians</div>
+        <div class="social-followers">18.1M</div>
+      </a>
+      <a class="social-card facebook" href="https://www.facebook.com/MumbaiIndians" target="_blank" rel="noopener">
+        <div class="social-icon">📘</div>
+        <div class="social-handle">Mumbai Indians</div>
+        <div class="social-followers">22.6M</div>
+      </a>
+      <a class="social-card youtube" href="https://www.youtube.com/mumbaiindians" target="_blank" rel="noopener">
+        <div class="social-icon">▶️</div>
+        <div class="social-handle">Mumbai Indians</div>
+        <div class="social-followers">4.2M</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img class="footer-brand-logo"
+               src="https://documents.iplt20.com/ipl/MI/Logos/Logooutline/MIoutline.png"
+               onerror="this.style.display='none'"
+               alt="MI Logo" />
+          <div class="footer-brand-name">MI Fan Hub</div>
+        </div>
+        <p class="footer-desc">Your ultimate destination for all things Mumbai Indians. Live scores, player profiles, match analysis, fan community and more. One Family. One Dream. Paltan Forever 💙</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Explore</div>
+        <ul class="footer-links">
+          <li><a href="#players">Star players of MI</a></li>
+          <li><a href="#schedule">Fixtures</a></li>
+          <li><a href="#points">Points Table</a></li>
+          <li><a href="#stats">Statistics</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#forum">Fan Forum</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Official Links</div>
+        <ul class="footer-links">
+          <li><a href="https://www.iplt20.com/teams/mumbai-indians/squad/2026" target="_blank">IPLT20.com/MI</a></li>
+          <li><a href="https://www.mumbaiindians.com" target="_blank">mumbaiindians.com</a></li>
+          <li><a href="https://twitter.com/mipaltan" target="_blank">Twitter / X</a></li>
+          <li><a href="https://www.instagram.com/mumbaiindians" target="_blank">Instagram</a></li>
+          <li><a href="https://www.facebook.com/MumbaiIndians" target="_blank">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Mumbai Indians Fan Hub · Fan-made, unofficial · Paltan Forever 💙</div>
+      <div class="footer-copy">Built with ❤ for the Paltan · Squad data: iplt20.com</div>
+    </div>
+  </footer>
+
+  <button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+  <script>
+    /* ─── HAMBURGER ─── */
+    const ham = document.getElementById('hamburger');
+    const mob = document.getElementById('mobile-menu');
+    ham.addEventListener('click', () => {
+      ham.classList.toggle('open');
+      mob.classList.toggle('open');
+    });
+    function closeMenu() { ham.classList.remove('open'); mob.classList.remove('open'); }
+
+    /* ─── SCROLL TO TOP ─── */
+    const scrollBtn = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () => {
+      scrollBtn.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    /* ─── PLAYER FILTER ─── */
+    function filterPlayers(role, btn) {
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.player-card').forEach(card => {
+        card.style.display = (role === 'all' || card.dataset.role === role) ? 'block' : 'none';
+      });
+    }
+
+    /* ─── PLAYER MODAL DATA ─── */
+    const playerData = {
+      rohit: {
+        name: 'Rohit Sharma', role: 'Opening Batter · MI Legend',
+        stats: [{ val: '6607', key: 'IPL Runs' }, { val: '31', key: 'Fifties' }, { val: '130+', key: 'SR' }],
+        bio: 'The "Hitman" of cricket, Rohit Sharma is widely regarded as one of the greatest T20 batters of all time. His ability to dismantle any bowling attack with elegance and power makes him the backbone of MI\'s batting lineup.'
+      },
+      sky: {
+        name: 'Suryakumar Yadav', role: 'Middle Order · ICC T20I World No.1',
+        stats: [{ val: '3800+', key: 'IPL Runs' }, { val: '148+', key: 'Best SR' }, { val: 'No.1', key: 'T20I Rank' }],
+        bio: 'The most innovative batsman in T20 cricket today, SKY plays shots from impossible positions and angles. His 360-degree game terrorises bowlers worldwide and brings Wankhede to its feet every single time.'
+      },
+      hardik: {
+        name: 'Hardik Pandya', role: 'Captain · All-rounder',
+        stats: [{ val: '2600+', key: 'IPL Runs' }, { val: '60+', key: 'Wickets' }, { val: 'Capt.', key: '2026' }],
+        bio: 'MI\'s captain for 2026, Hardik Pandya is the ultimate T20 package — an explosive middle-order batter and a lethal fast-medium bowler who regularly delivers match-winning performances.'
+      },
+      bumrah: {
+        name: 'Jasprit Bumrah', role: 'Pace Bowler · World No.1',
+        stats: [{ val: '150+', key: 'Wickets' }, { val: '7.43', key: 'Economy' }, { val: 'No.1', key: 'ICC Rank' }],
+        bio: 'Arguably the best bowler in world cricket, Bumrah\'s unorthodox action and lethal yorkers make him virtually unplayable. He is the cornerstone of MI\'s bowling attack and a constant match-winner.'
+      },
+      boult: {
+        name: 'Trent Boult', role: 'Pace Bowler · Swing King',
+        stats: [{ val: '80+', key: 'Wickets' }, { val: '8.12', key: 'Economy' }, { val: 'NZ', key: 'Nation' }],
+        bio: 'One of the most skilled swing bowlers in world cricket, Trent Boult is lethal with the new ball and an expert at taking powerplay wickets that set the tone for MI\'s bowling innings.'
+      },
+      tilak: {
+        name: 'N. Tilak Varma', role: 'Middle Order · Left-hand Bat',
+        stats: [{ val: '1200+', key: 'IPL Runs' }, { val: '138', key: 'Best SR' }, { val: '22', key: 'Age' }],
+        bio: 'One of India\'s most exciting young talents, Tilak Varma has shown maturity beyond his years in the middle order for MI. His composed, high-impact batting style has earned rave reviews from across the cricketing world.'
+      },
+      qdk: {
+        name: 'Quinton de Kock', role: 'WK-Batter · Overseas Star',
+        stats: [{ val: '2700+', key: 'IPL Runs' }, { val: '133', key: 'Best SR' }, { val: 'SA', key: 'Nation' }],
+        bio: 'Quinton de Kock is one of the most destructive wicket-keeper batters in T20 cricket. His ability to attack in the powerplay makes him a perfect foil for any top-order lineup at MI.'
+      },
+      rickelton: {
+        name: 'Ryan Rickelton', role: 'WK-Batter · New Signing',
+        stats: [{ val: 'New', key: 'IPL Debut' }, { val: 'WK', key: 'Role' }, { val: 'SA', key: 'Nation' }],
+        bio: 'South African wicket-keeper batsman Ryan Rickelton is a new addition to the MI 2026 squad. Known for his attacking top-order play and reliable glovework, he adds depth to MI\'s batting lineup.'
+      },
+      robin: {
+        name: 'Robin Minz', role: 'WK-Batter · Young Star',
+        stats: [{ val: 'Young', key: 'Talent' }, { val: 'WK', key: 'Role' }, { val: 'IND', key: 'Nation' }],
+        bio: 'An exciting young wicket-keeper batsman from India, Robin Minz brings youthful energy and a fearless approach to batting. A future star in the making for Mumbai Indians.'
+      },
+      will: {
+        name: 'Will Jacks', role: 'All-rounder · England',
+        stats: [{ val: '140+', key: 'Best SR' }, { val: 'Off', key: 'Spin' }, { val: 'ENG', key: 'Nation' }],
+        bio: 'England all-rounder Will Jacks is an explosive batter and handy off-spinner. His big-hitting ability in the middle overs and versatility as a bowler make him a valuable asset for MI in 2026.'
+      },
+      shardul: {
+        name: 'Shardul Thakur', role: 'All-rounder · Pace',
+        stats: [{ val: '80+', key: 'Wickets' }, { val: '700+', key: 'IPL Runs' }, { val: 'IND', key: 'Nation' }],
+        bio: 'Shardul Thakur is known for his ability to take crucial wickets and score valuable runs in the lower-middle order. His big-match temperament and experience make him a key player for MI in 2026.'
+      },
+      deepak: {
+        name: 'Deepak Chahar', role: 'Pace Bowler · Swing Artist',
+        stats: [{ val: '70+', key: 'Wickets' }, { val: '8.1', key: 'Economy' }, { val: 'IND', key: 'Nation' }],
+        bio: 'Deepak Chahar is one of the finest powerplay bowlers in T20 cricket, known for his ability to swing the ball and take early wickets. A vital addition to MI\'s 2026 bowling attack.'
+      },
+      keshav: {
+        name: 'Keshav Maharaj', role: 'Left-arm Spinner · South Africa',
+        stats: [{ val: '50+', key: 'Wickets' }, { val: '7.6', key: 'Economy' }, { val: 'SA', key: 'Nation' }],
+        bio: 'Keshav Maharaj is one of the most reliable left-arm spinners in T20 cricket. His accuracy and ability to control the middle overs make him a crucial overseas pick for Mumbai Indians in 2026.'
+      },
+      corbin: {
+        name: 'Corbin Bosch', role: 'All-rounder · South Africa',
+        stats: [{ val: 'New', key: 'IPL Season' }, { val: 'Pace+Bat', key: 'Role' }, { val: 'SA', key: 'Nation' }],
+        bio: 'South African all-rounder Corbin Bosch adds pace and batting firepower to MI\'s lineup. His ability to take wickets and score quickly in the lower-middle order makes him a versatile pick.'
+      },
+      allah: {
+        name: 'Allah Ghazanfar', role: 'Off-break Bowler · Afghanistan',
+        stats: [{ val: 'Young', key: 'Talent' }, { val: 'Off', key: 'Spin' }, { val: 'AFG', key: 'Nation' }],
+        bio: 'Afghan off-break bowler Allah Ghazanfar is a young and exciting talent. His ability to take wickets in the powerplay and middle overs makes him a unique weapon in MI\'s bowling arsenal.'
+      },
+      naman: {
+        name: 'Naman Dhir', role: 'All-rounder · India',
+        stats: [{ val: '500+', key: 'IPL Runs' }, { val: 'Bat+Bowl', key: 'Role' }, { val: 'IND', key: 'Nation' }],
+        bio: 'A hard-hitting lower-order batsman and useful part-time bowler, Naman Dhir brings valuable depth to MI\'s batting lineup and contributes with the ball when required.'
+      },
+      raj: {
+        name: 'Raj Angad Bawa', role: 'All-rounder · India',
+        stats: [{ val: 'Young', key: 'Talent' }, { val: 'All-Rnd', key: 'Role' }, { val: 'IND', key: 'Nation' }],
+        bio: 'Raj Angad Bawa is a promising young all-rounder who burst onto the IPL scene with impressive performances. His big-hitting ability and medium-pace bowling make him an exciting prospect for MI.'
+      },
+      sherfane: {
+        name: 'Sherfane Rutherford', role: 'Batter · West Indies',
+        stats: [{ val: '150+', key: 'SR' }, { val: 'WI', key: 'Nation' }, { val: 'Power', key: 'Hitter' }],
+        bio: 'West Indian power-hitter Sherfane Rutherford is known for his explosive batting and ability to accelerate in the death overs. He adds a dangerous dimension to MI\'s middle order in 2026.'
+      },
+      danish: {
+        name: 'Danish Malewar', role: 'Batter · India',
+        stats: [{ val: 'IND', key: 'Nation' }, { val: 'Top', key: 'Order' }, { val: 'New', key: 'IPL Season' }],
+        bio: 'Danish Malewar is a technically sound young batter from India who provides valuable depth to Mumbai Indians\' batting order for the 2026 season.'
+      },
+      mayank_m: {
+        name: 'Mayank Markande', role: 'Leg Spin Bowler · India',
+        stats: [{ val: '40+', key: 'Wickets' }, { val: '7.8', key: 'Economy' }, { val: 'Leg', key: 'Spin' }],
+        bio: 'Mayank Markande is a wristy leg-spinner who burst onto the IPL scene with stunning performances for MI. His ability to deceive batters with turn and variations makes him a tricky proposition.'
+      },
+      ashwani: {
+        name: 'Ashwani Kumar', role: 'Pace Bowler · India',
+        stats: [{ val: 'Pace', key: 'Type' }, { val: 'IND', key: 'Nation' }, { val: 'Young', key: 'Talent' }],
+        bio: 'Ashwani Kumar is a young and promising pace bowler who has shown real ability to swing the ball at pace. An exciting prospect in MI\'s bowling attack for 2026.'
+      },
+      raghu: {
+        name: 'Raghu Sharma', role: 'Leg Spin Bowler · India',
+        stats: [{ val: 'Wrist', key: 'Spin' }, { val: 'IND', key: 'Nation' }, { val: 'Young', key: 'Talent' }],
+        bio: 'Raghu Sharma is a leg-spin bowler known for his sharp turn and good variations. He adds another spinning option to MI\'s bowling lineup in 2026.'
+      },
+      krish: {
+        name: 'Krish Bhagat', role: 'All-rounder · India',
+        stats: [{ val: 'Young', key: 'Talent' }, { val: 'All-Rnd', key: 'Role' }, { val: 'IND', key: 'Nation' }],
+        bio: 'Krish Bhagat is a young all-rounder added to the Mumbai Indians squad for 2026. He brings youthful energy and promises to be a future asset for the team.'
+      },
+      mayank_r: {
+        name: 'Mayank Rawat', role: 'All-rounder · India',
+        stats: [{ val: 'Young', key: 'Talent' }, { val: 'All-Rnd', key: 'Role' }, { val: 'IND', key: 'Nation' }],
+        bio: 'Mayank Rawat is a young all-rounder who brings raw talent and ambition to the Mumbai Indians squad. An exciting prospect for the future of the franchise.'
+      }
+    };
+
+    function openModal(id) {
+      const p = playerData[id];
+      if (!p) return;
+      const body = document.getElementById('modal-body');
+      body.innerHTML = `
+        <div class="modal-name">${p.name}</div>
+        <div class="modal-role">${p.role}</div>
+        <div class="modal-stats">
+          ${p.stats.map(s => `<div class="modal-stat"><div class="modal-stat-val">${s.val}</div><div class="modal-stat-key">${s.key}</div></div>`).join('')}
+        </div>
+        <div class="modal-bio">${p.bio}</div>
+      `;
+      document.getElementById('player-modal').classList.add('open');
+    }
+    function closeModal() { document.getElementById('player-modal').classList.remove('open'); }
+    function closeModalOnOverlay(e) { if (e.target === document.getElementById('player-modal')) closeModal(); }
+
+    /* ─── POLL ─── */
+    const pollVotes = { 'Rohit Sharma': 340, 'Jasprit Bumrah': 280, 'Suryakumar Yadav': 220, 'Hardik Pandya': 110, 'Tilak Varma': 50 };
+
+    function submitPoll() {
+      const selected = document.querySelector('input[name="player"]:checked');
+      const result = document.getElementById('poll-result');
+      if (!selected) { result.style.display = 'block'; result.textContent = '⚠ Please select a player first!'; return; }
+      pollVotes[selected.value] = (pollVotes[selected.value] || 0) + 1;
+      const total = Object.values(pollVotes).reduce((a, b) => a + b, 0);
+      const keys = ['Rohit Sharma','Jasprit Bumrah','Suryakumar Yadav','Hardik Pandya','Tilak Varma'];
+      keys.forEach((k, i) => {
+        const pct = Math.round((pollVotes[k] / total) * 100);
+        const el = document.getElementById(`pct-${i+1}`);
+        const bar = document.querySelectorAll('.bar-fill')[i];
+        if (el) el.textContent = pct + '%';
+        if (bar) bar.style.width = pct + '%';
+      });
+      result.style.display = 'block';
+      result.textContent = `✔ Voted for ${selected.value}! One Family, One Dream! 💙`;
+      document.querySelectorAll('input[name="player"]').forEach(r => r.disabled = true);
+      document.querySelector('.poll-btn').disabled = true;
+      document.querySelector('.poll-btn').style.opacity = '0.4';
+    }
+
+    /* ─── FORUM ─── */
+    function postComment() {
+      const name = document.getElementById('forum-name').value.trim();
+      const msg = document.getElementById('forum-msg').value.trim();
+      if (!name || !msg) { alert('Please fill in your name and message.'); return; }
+      const list = document.getElementById('forum-list');
+      const item = document.createElement('div');
+      item.className = 'forum-item';
+      item.innerHTML = `
+        <div class="forum-meta">
+          <span class="forum-author">@${name.replace(/[^a-zA-Z0-9_]/g,'')}</span>
+          <span class="forum-time">Just now</span>
+        </div>
+        <div class="forum-text">${msg.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+        <button class="forum-like" onclick="toggleLike(this)">💙 0 Likes</button>
+      `;
+      list.prepend(item);
+      document.getElementById('forum-name').value = '';
+      document.getElementById('forum-msg').value = '';
+    }
+
+    function toggleLike(btn) {
+      const liked = btn.classList.contains('liked');
+      const match = btn.textContent.match(/(\d+)/);
+      let count = match ? parseInt(match[1]) : 0;
+      if (liked) { count--; btn.classList.remove('liked'); btn.textContent = `💙 ${count} Likes`; }
+      else { count++; btn.classList.add('liked'); btn.textContent = `💛 ${count} Likes`; }
+    }
+  </script>
+</body>
+</html>
