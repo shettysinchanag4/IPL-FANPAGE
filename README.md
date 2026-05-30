@@ -1,2 +1,1 @@
-# IPL-FANPAGE
-NA
+This repository contains a collection of web development projects created as part of my learning journey and internship tasks. The projects include a Personal Portfolio Website, IPL Fan Page, and other responsive web applications developed using HTML, CSS, JavaScript, and modern web development practices. These projects demonstrate my skills in front-end development, responsive design, user interface creation, DOM manipulation, and website deployment. Through these projects, I have gained hands-on experience in building interactive, user-friendly, and visually appealing websites while improving my problem-solving, debugging, and project management abilities. This repository showcases my growth as a Computer Science student and aspiring web developer.
